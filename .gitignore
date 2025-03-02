@@ -1,0 +1,38 @@
+# Ignore VS Code settings
+.vscode/
+
+# Ignore build files and binaries
+*.exe
+*.out
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.dll
+
+# Ignore compiled binary directories
+/bin/
+/build/
+/dist/
+
+# Ignore debugging and profiling files
+*.dSYM/
+*.pdb
+*.ipch
+*.tlog
+
+# Ignore CMake build directories
+CMakeFiles/
+CMakeCache.txt
+
+# Ignore temporary or system files
+*.tmp
+*.log
+*.swp
+*.swo
+*.DS_Store
+Thumbs.db
+
+# Ignore user-specific settings
+*.code-workspace
