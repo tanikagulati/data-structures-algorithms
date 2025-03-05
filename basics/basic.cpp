@@ -27,7 +27,7 @@ void vectors()
     vec.push_back({3, 4});
     vec.emplace_back(3, 4); // Syntax difference
 
-    vector<int> v1(3, 10); // {10,10,10}
+    vector<int> v1(2, 5); // {5, 5}
 
     vector<int> v2(v1); // A copy of v1 into v2
 
@@ -39,7 +39,10 @@ void vectors()
     vector<int>::reverse_iterator itx = v.rend(); // Reverse iterators are rarely used
     vector<int>::reverse_iterator itx2 = v.rbegin();
 
-    cout << v.back() << endl; // Back points to last element
+    cout << v.front() << endl; // First element
+    cout << v.back() << endl;  // Last element
+
+    cout << v.size() << endl; // Size
 
     // Printing using iterator
     for (vector<int>::iterator it = v.begin(); it != v.end(); it++)
@@ -57,9 +60,108 @@ void vectors()
         cout << i << " ";
     }
 
+    // Insertion
+    v.insert(v.begin(), 10);                   // {10, 1, 2}
+    v.insert(v.begin() + 1, 3, 30);            // {10, 30, 30, 30, 1, 2}
+    v.insert(v.end(), {3, 4});                 // {10, 30, 30, 30, 1, 2, 3, 4}
+    v.insert(v.begin(), v1.begin(), v1.end()); // {5, 5, 10, 30, 30, 30, 1, 2, 3, 4}
+
+    v1.swap(v2); // Swap elements
+
     // Deletion
-    v.erase(v.begin() + 1); // Deletes 2nd element
-    // v.erase(v1.begin() + 1, v1.begin() + 3); // Deletes 2nd and 3rd element -> (end of range not inclusive)
+    v.pop_back();                          // Deletes last element
+    v.erase(v.begin() + 1);                // Deletes 2nd element
+    v.erase(v.begin() + 1, v.begin() + 3); // Deletes 2nd and 3rd element -> (end of range not inclusive)
+    v.clear();                             // Erases entire vector
+
+    v.empty(); // Boolean
+    cout << endl;
+}
+
+void lists()
+{
+    // Dynamic in nature
+    // Insertion in vector is costly than list since a singly LL is maintained for vector, whereas doubly LL for list
+
+    list<int> ls;
+    ls.push_back(1);
+    ls.emplace_back(2);
+    ls.push_front(3);
+    ls.emplace_front(4);
+
+    ls.pop_back();
+    ls.pop_front();
+
+    ls.front();
+    ls.back();
+
+    // same functions as in vector like begin, end, rend, rbegin, insert, swap, size, clear
+}
+
+void deques()
+{
+    // same as list
+}
+
+void stacks()
+{
+    // LIFO
+    // O(1) -> For all operations push, pop, top
+    // No index based access (st[1] -> invalid)
+    stack<int> st;
+    st.push(1);
+    st.push(2);
+    st.push(3);
+    st.emplace(4);
+
+    st.top(); // 4
+    st.pop();
+    st.size();  // 3
+    st.empty(); // false
+
+    stack<int> st1, st2;
+    st1.swap(st2);
+}
+
+void queues()
+{
+    // FIFO
+    // O(1) -> All operations
+    queue<int> q;
+    q.push(1);
+    q.push(2);
+    q.emplace(3);
+
+    q.back() += 5;
+    cout << q.back() << endl; // 8
+
+    q.pop();   // {2, 8}
+    q.front(); // 2
+}
+
+void priorityQueues()
+{
+    // Internally uses tree data structure
+    // Push / Pop -> O(logn), Top -> O(1)
+    priority_queue<int> pq; // Max heap
+    pq.push(2);
+    pq.push(6);
+    pq.emplace(1);
+
+    cout << pq.top() << endl; // 6
+    pq.pop();                 // {2, 1}
+
+    priority_queue<int, vector<int>, greater<int>> pq1; // Min heap
+    pq1.push(2);
+    pq1.push(6);
+    pq1.emplace(1);
+
+    cout << pq1.top() << endl; // 1
+}
+
+void sets()
+{
+    // sorted and unique
 }
 
 int main()
@@ -84,4 +186,10 @@ int main()
     // Containers
     pairs();
     vectors();
+    lists();
+    deques();
+    stacks();
+    queues();
+    priorityQueues();
+    sets();
 }
