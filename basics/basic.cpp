@@ -71,7 +71,7 @@ void vectors()
     // Deletion
     v.pop_back();                          // Deletes last element
     v.erase(v.begin() + 1);                // Deletes 2nd element
-    v.erase(v.begin() + 1, v.begin() + 3); // Deletes 2nd and 3rd element -> (end of range not inclusive)
+    v.erase(v.begin() + 1, v.begin() + 3); // Deletes 2nd and 3rd element -> (end of range not inclusive) -> [first, last)
     v.clear();                             // Erases entire vector
 
     v.empty(); // Boolean
@@ -82,7 +82,6 @@ void lists()
 {
     // Dynamic in nature
     // Insertion in vector is costly than list since a singly LL is maintained for vector, whereas doubly LL for list
-
     list<int> ls;
     ls.push_back(1);
     ls.emplace_back(2);
@@ -162,6 +161,53 @@ void priorityQueues()
 void sets()
 {
     // sorted and unique
+    // Internally uses tree data structure
+    // O(logn) -> All operations
+    set<int> s;
+    s.insert(1);
+    s.insert(5);
+    s.insert(1);
+    s.insert(4);
+    s.insert(3); // {1, 3, 4, 5}
+
+    cout << s.count(3) << endl; // 1 if present, 0 if not (count can never exceed 1, since unique elements)
+
+    s.erase(1); // {3, 4, 5}
+
+    auto it = s.find(4);   // Points to memory address of given element
+    auto it2 = s.find(10); // Element not present? -> st.end() -> points to address of next to last element
+
+    s.erase(it, it2); // {3}
+
+    // Read: lower and upper bound
+}
+
+void multiSets()
+{
+    // sorted and can store duplicates
+    multiset<int> ms;
+    ms.insert(1);
+    ms.insert(1);
+    ms.insert(1);
+    ms.insert(2);
+    ms.insert(2);
+
+    ms.count(1);
+
+    ms.erase(2);          // Erases all 2's
+    ms.erase(ms.find(1)); // Erases first 1
+    ms.erase(ms.find(1), next(ms.find(1), 2));
+
+    /*
+    Tree based containers like set use Bidirectional iterators that do not support (it + n) because of no direct indexing
+    unlike vector/array/deque that are contagious and use Random access iterators
+    Therefore, it's equivalent -> next(it, n) is used instead (next works for linear as well)
+    next(it, n) internally moves step-by-step using ++it. It traverses the tree by following internal parent and child pointers. Takes O(n)
+    */
+}
+
+void unorderedSets()
+{
 }
 
 int main()
@@ -192,4 +238,5 @@ int main()
     queues();
     priorityQueues();
     sets();
+    multiSets();
 }
