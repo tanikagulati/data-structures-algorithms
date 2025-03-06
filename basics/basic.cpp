@@ -208,6 +208,107 @@ void multiSets()
 
 void unorderedSets()
 {
+    // Unique and randomized order
+    // O(1) -> All operations
+    // For a worst case scenario -> O(n) (rare)
+    // Lower and upper bound functions doesn't work
+    unordered_set<int> st;
+}
+
+void maps()
+{
+    // Unique keys in sorted order
+    // O(logn) -> All operations
+    map<int, int> mp;
+    map<int, pair<int, int>> mp1;
+    map<pair<int, int>, int> mp2;
+
+    mp[1] = 10;
+    mp.insert({7, 20});
+    mp.emplace(3, 30);
+
+    mp2[{4, 2}] = 10;
+
+    for (auto it : mp)
+    {
+        cout << it.first << " " << it.second << endl;
+    }
+
+    cout << mp[3] << endl; // 30
+    cout << mp[9] << endl; // key not exist -> 0 / null
+
+    auto it = mp.find(7);         // if not present -> mp.end()
+    cout << (*it).second << endl; // or it -> first (preferred)
+
+    // lower bound, upper bound
+
+    // begin, end, erase, size, swap, empty ... same
+}
+
+void multiMaps()
+{
+    // Allows duplicate keys
+    // same as map but mp[key] cannot be used
+}
+
+void unorderedMaps()
+{
+    // Unique keys, randomized order
+    // O(1) -> All operations
+    // O(n) -> rare worst case
+    // same as set and unordered set difference
+}
+
+bool comp(pair<int, int> p1, pair<int, int> p2)
+{
+    // Sort on the basis of 2nd element, in ascending order
+    // If 2nd elements are equal, sort on the basis of 1st, but in descending order
+    if (p1.second < p2.second)
+        return true;
+    if (p1.second > p2.second)
+        return false;
+
+    if (p1.first > p2.first)
+        return true;
+    else
+        return false;
+}
+
+void sorting()
+{
+    int a[4] = {5, 3, 6, 1};
+    vector<int> v = {7, 3, 8};
+
+    sort(a, a + 4);
+    sort(a, a + 4, greater<int>()); // Descending order
+
+    sort(v.begin(), v.end());
+    sort(v.begin() + 1, v.end());
+
+    // Custom sort using comparator
+    vector<pair<int, int>> vec = {{1, 2}, {4, 6}, {5, 2}};
+    sort(vec.begin(), vec.end(), comp);
+}
+
+void misc()
+{
+    int num = 7;
+    cout << __builtin_popcount(num) << endl; // 3 -> Returns no of signed bits (7 = 111)
+
+    long long num2 = 35648297368;
+    cout << __builtin_popcountll(num2) << endl; // For long long type
+
+    string s = "123";
+    do
+    {
+        cout << s << endl;
+    } while (next_permutation(s.begin(), s.end())); // Modifies 's' in-place
+
+    // s should be always sorted first, to get all permutations
+
+    vector<int> v = {7, 3, 8};
+    cout << *max_element(v.begin(), v.end() - 1) << endl; // Imp -> *
+    cout << *min_element(v.begin(), v.end()) << endl;
 }
 
 int main()
@@ -229,7 +330,7 @@ int main()
     */
 
     // Standard Template Library (STL):
-    // Containers
+    // Containers and Iterators
     pairs();
     vectors();
     lists();
@@ -239,4 +340,12 @@ int main()
     priorityQueues();
     sets();
     multiSets();
+    unorderedSets();
+    maps();
+    multiMaps();
+    unorderedMaps();
+
+    // Algos
+    sorting();
+    misc();
 }
