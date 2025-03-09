@@ -8,7 +8,7 @@ void extractAndCountDigits(int n)
 
     // Digits and count
     int count = 0;
-    // Reverse  the number
+    // Reverse the number
     int reverse = 0;
 
     while (n > 0)
@@ -23,11 +23,38 @@ void extractAndCountDigits(int n)
     cout << count << endl;
     cout << reverse << endl;
 
-    // TC: n = n / 10 -> O(log10(n))
-    // If division by 2 -> O(log2(n)) , division by 5 -> O(log5(n))
+    /*
+    TC: n = n / 10 -> O(log10(n))
+    If division by 2 -> O(log2(n)) , division by 5 -> O(log5(n))
+
+    Applications:
+    Armstrong number: If number is equal to sum of its own digits each raised to the power of the number of digits (153 = 1^3 + 5^3 + 3^3)
+    */
+}
+
+void printAllDivisors(int n)
+{
+    vector<int> divisors;
+
+    // Divisors start repeating after square root of n
+    // If n = 12 -> 1*12=12, 2*6=12, 3*4=12, 4*3=12, 6*2=12, 12*1=12
+    for (int i = 1; i * i <= n; i++) // Imp -> i = 1
+    {
+        if (n % i == 0)
+        {
+            divisors.push_back(i);
+            if ((n / i) != i)
+                divisors.push_back(n / i);
+        }
+    }
+    sort(divisors.begin(), divisors.end());
+
+    for (auto i : divisors)
+        cout << i << " ";
 }
 
 int main()
 {
     extractAndCountDigits(73600);
+    printAllDivisors(36);
 }

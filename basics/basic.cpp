@@ -279,6 +279,7 @@ void sorting()
     int a[4] = {5, 3, 6, 1};
     vector<int> v = {7, 3, 8};
 
+    // TC: O(nlogn)
     sort(a, a + 4);
     sort(a, a + 4, greater<int>()); // Descending order
 
