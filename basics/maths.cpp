@@ -51,10 +51,36 @@ void printAllDivisors(int n)
 
     for (auto i : divisors)
         cout << i << " ";
+    cout << endl;
+}
+
+bool checkPrime(int n)
+{
+
+    // Each composite number has at least one prime factor, so check divisibility only by (potential) prime numbers
+    // All prime numbers (except 2 & 3) can be expressed in the form of (6k ± 1)
+
+    if (n < 2)
+        return false;
+    if (n == 2 || n == 3)
+        return true;
+    if (n % 2 == 0 || n % 3 == 0)
+        return false;
+
+    for (int i = 5; i * i <= n; i += 6) // i will always be 6k - 1
+    {
+        if (n % i == 0 || n % (i + 2) == 0) // check for divisibility by 6k - 1 and 6k + 1
+            return false;
+    }
+    return true;
+
+    // Case 1: Iterate all till √N -> O(√N)
+    // Case 2: Logic above -> O(√N/3) approx. ~ O(√N) -> but faster than case 1
 }
 
 int main()
 {
     extractAndCountDigits(73600);
     printAllDivisors(36);
+    cout << checkPrime(37) << endl;
 }
