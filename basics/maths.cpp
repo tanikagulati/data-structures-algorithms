@@ -77,23 +77,39 @@ bool checkPrime(int n)
     // Case 2: Logic above -> O(√N/3) approx. ~ O(√N) -> but faster than case 1
 }
 
-void euclideanTheorem()
-{
-}
-
-int findGcd(int n1, int n2)
+void findGcd(int n1, int n2)
 {
     int gcd = 1;
-
     for (int i = 1; i <= min(n1, n2); i++)
     {
         if (n1 % i == 0 && n2 % i == 0)
-        {
-
             gcd = i;
-        }
     }
-    return gcd;
+    cout << gcd << endl;
+}
+
+void euclideanTheorem(int n1, int n2)
+{
+    // gcd(a, b) = gcd(b, a mod b)
+    // This process repeats until b = 0, at which point, a is the GCD
+
+    while (n1 != 0 && n2 != 0)
+    {
+        if (n1 < n2)
+            n2 = n2 % n1;
+        else
+            n1 = n1 % n2;
+    }
+    cout << (n1 == 0 ? n2 : n1) << endl;
+
+    // -- OR --
+
+    while (n1 != 0)
+    {
+        n2 = n2 % n1;
+        swap(n1, n2);
+    }
+    cout << n2 << endl;
 }
 
 int main()
@@ -101,6 +117,10 @@ int main()
     extractAndCountDigits(73600);
     printAllDivisors(36);
     cout << checkPrime(37) << endl;
-    cout << gcd(20, 40) << endl;
-    euclideanTheorem();
+    findGcd(20, 40);
+    euclideanTheorem(20, 40);
 }
+
+// small mod big = small
+// num mod 0 = undefined
+// 0 mod num = 0
