@@ -56,7 +56,6 @@ void printAllDivisors(int n)
 
 bool checkPrime(int n)
 {
-
     // Each composite number has at least one prime factor, so check divisibility only by (potential) prime numbers
     // All prime numbers (except 2 & 3) can be expressed in the form of (6k ± 1)
 
@@ -78,9 +77,30 @@ bool checkPrime(int n)
     // Case 2: Logic above -> O(√N/3) approx. ~ O(√N) -> but faster than case 1
 }
 
+void euclideanTheorem()
+{
+}
+
+int findGcd(int n1, int n2)
+{
+    int gcd = 1;
+
+    for (int i = 1; i <= min(n1, n2); i++)
+    {
+        if (n1 % i == 0 && n2 % i == 0)
+        {
+
+            gcd = i;
+        }
+    }
+    return gcd;
+}
+
 int main()
 {
     extractAndCountDigits(73600);
     printAllDivisors(36);
     cout << checkPrime(37) << endl;
+    cout << gcd(20, 40) << endl;
+    euclideanTheorem();
 }
