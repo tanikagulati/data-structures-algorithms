@@ -90,9 +90,12 @@ void findGcd(int n1, int n2)
 
 void euclideanTheorem(int n1, int n2)
 {
-    // gcd(a, b) = gcd(b, a mod b)
-    // This process repeats until b = 0, at which point, a is the GCD
-    // TC: O(log(min(a, b)))
+    /*
+    The GCD of two numbers remains unchanged if larger number is replaced by its remainder when divided by the smaller number
+    gcd(a, b) = gcd(b, a mod b)
+    This process repeats until b = 0, at which point, a is the GCD
+    TC: O(log(min(a, b)))
+    */
 
     while (n1 != 0 && n2 != 0)
     {
