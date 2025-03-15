@@ -82,6 +82,14 @@ bool palindrome(string &st, int n, int l)
     return palindrome(st, n, l + 1); // Don't forget 'return'
 }
 
+int fibonacci(int n)
+{
+    if (n <= 1)
+        return n;
+    return fibonacci(n - 1) + fibonacci(n - 2);
+    // TC: O(2^n)
+}
+
 int main()
 {
     int n;
@@ -97,13 +105,21 @@ int main()
     cin >> st;
 
     printName(n, 0);
+
     counting(n, 0);
     cout << endl;
+
     reverseCounting(n, 0);
     cout << endl;
+
     cout << sum1ToN(n) << endl;
     sum1ToN(n, 0);
+
     cout << factorial(n) << endl;
+
     reverseArray(arr, n, 0);
+
     cout << palindrome(st, st.size(), 0) << endl;
+
+    cout << fibonacci(n) << endl;
 }
