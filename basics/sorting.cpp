@@ -74,6 +74,52 @@ void insertionSort(int arr[], int n)
     // Best -> O(n)
 }
 
+void mergeTwoSortedArrays(int arr[], int l, int mid, int r)
+{
+    int left = l;
+    int right = mid + 1;
+    vector<int> temp;
+    while (left <= mid && right <= r)
+    {
+        if (arr[left] <= arr[right])
+        {
+            temp.push_back(arr[left]);
+            left++;
+        }
+        else
+        {
+            temp.push_back(arr[right]);
+            right++;
+        }
+    }
+
+    while (left <= mid)
+    {
+        temp.push_back(arr[left]);
+        left++;
+    }
+    while (right <= r)
+    {
+        temp.push_back(arr[right]);
+        right++;
+    }
+
+    for (int i = l; i <= r; i++)
+    {
+        arr[i] = temp[i - l];
+    }
+}
+
+void mergeSort(int arr[], int l, int r)
+{ // 2 5 18 4 7
+    if (l == r)
+        return;
+    int mid = (l + r) / 2;
+    mergeSort(arr, 0, mid);
+    mergeSort(arr, mid + 1, r);
+    mergeTwoSortedArrays(arr, l, mid, r);
+}
+
 int main()
 {
     int n;
@@ -83,7 +129,12 @@ int main()
     {
         cin >> arr[i];
     }
-    selectionSort(arr, n);
-    bubbleSort(arr, n);
-    insertionSort(arr, n);
+    // selectionSort(arr, n);
+    // bubbleSort(arr, n);
+    // insertionSort(arr, n);
+    mergeSort(arr, 0, n - 1);
+    for (int i = 0; i < n; i++)
+    {
+        cout << arr[i] << " ";
+    }
 }
