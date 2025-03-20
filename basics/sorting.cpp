@@ -92,7 +92,6 @@ void mergeTwoSortedArrays(int arr[], int l, int mid, int r)
             right++;
         }
     }
-
     while (left <= mid)
     {
         temp.push_back(arr[left]);
@@ -103,15 +102,16 @@ void mergeTwoSortedArrays(int arr[], int l, int mid, int r)
         temp.push_back(arr[right]);
         right++;
     }
-
     for (int i = l; i <= r; i++)
     {
         arr[i] = temp[i - l];
     }
+    // TC: O(nlogn)
+    // SC: O(n)
 }
 
 void mergeSort(int arr[], int l, int r)
-{ // 2 5 18 4 7
+{
     if (l == r)
         return;
     int mid = (l + r) / 2;
