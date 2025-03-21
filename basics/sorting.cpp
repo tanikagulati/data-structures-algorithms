@@ -107,17 +107,57 @@ void mergeTwoSortedArrays(int arr[], int l, int mid, int r)
         arr[i] = temp[i - l];
     }
     // TC: O(nlogn)
-    // SC: O(n)
+    // SC: O(n) (Due to temp vector)
 }
 
 void mergeSort(int arr[], int l, int r)
 {
+    // Divide and conquer
     if (l == r)
         return;
     int mid = (l + r) / 2;
     mergeSort(arr, 0, mid);
     mergeSort(arr, mid + 1, r);
     mergeTwoSortedArrays(arr, l, mid, r);
+}
+
+int placePivotAtCorrectPosition(int arr[], int l, int h)
+{
+    int i = l;
+    int j = h;
+    while (i <= j)
+    {
+        while (i <= j && arr[i] <= arr[l])
+        {
+            i++;
+        }
+        while (i <= j && arr[j] > arr[l])
+        {
+            j--;
+        }
+        if (i < j)
+        {
+            swap(arr[j], arr[i]);
+        }
+    }
+    swap(arr[l], arr[j]);
+    return j;
+}
+
+void quickSort(int arr[], int l, int h)
+{
+    // Divide and conquer
+    // Pick a pivot at place at correct position
+    // Smaller on left, greater on the right
+    if (l >= h)
+        return;
+
+    int partionIndex = placePivotAtCorrectPosition(arr, l, h);
+
+    quickSort(arr, l, partionIndex - 1);
+    quickSort(arr, partionIndex + 1, h);
+    // TC: O(nlogn)
+    // SC: O(1) (Recursion stack space is not considered)
 }
 
 int main()
@@ -129,10 +169,17 @@ int main()
     {
         cin >> arr[i];
     }
-    // selectionSort(arr, n);
-    // bubbleSort(arr, n);
-    // insertionSort(arr, n);
+    selectionSort(arr, n);
+    bubbleSort(arr, n);
+    insertionSort(arr, n);
+
     mergeSort(arr, 0, n - 1);
+    for (int i = 0; i < n; i++)
+    {
+        cout << arr[i] << " ";
+    }
+
+    quickSort(arr, 0, n - 1);
     for (int i = 0; i < n; i++)
     {
         cout << arr[i] << " ";
