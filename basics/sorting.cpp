@@ -152,12 +152,48 @@ void quickSort(int arr[], int l, int h)
     if (l >= h)
         return;
 
-    int partionIndex = placePivotAtCorrectPosition(arr, l, h);
+    int partitionIndex = placePivotAtCorrectPosition(arr, l, h);
 
-    quickSort(arr, l, partionIndex - 1);
-    quickSort(arr, partionIndex + 1, h);
+    quickSort(arr, l, partitionIndex - 1);
+    quickSort(arr, partitionIndex + 1, h);
     // TC: O(nlogn)
     // SC: O(1) (Recursion stack space is not considered)
+}
+
+void recursiveBubbleSort(int arr[], int n)
+{
+    // Push max to last by adjacent swaps
+    if (n == 1)
+        return;
+    int didSwap = 0;
+    for (int i = 0; i < n - 1; i++)
+    {
+        if (arr[i] > arr[i + 1])
+        {
+            swap(arr[i], arr[i + 1]);
+            didSwap = 1;
+        }
+    }
+    if (didSwap == 0)
+        return;
+    recursiveBubbleSort(arr, n - 1);
+    // TC: worst and avg -> O(n^2)
+    // Best -> O(n)
+}
+
+void recursiveInsertionSort(int arr[], int n, int k)
+{
+    if (k == n)
+        return;
+    int i = k;
+    while (i > 0 && arr[i] < arr[i - 1])
+    {
+        swap(arr[i], arr[i - 1]);
+        i--;
+    }
+    recursiveInsertionSort(arr, n, k + 1);
+    // TC: worst and avg -> O(n^2)
+    // Best -> O(n)
 }
 
 int main()
@@ -174,12 +210,11 @@ int main()
     insertionSort(arr, n);
 
     mergeSort(arr, 0, n - 1);
-    for (int i = 0; i < n; i++)
-    {
-        cout << arr[i] << " ";
-    }
-
     quickSort(arr, 0, n - 1);
+
+    recursiveBubbleSort(arr, n);
+    recursiveInsertionSort(arr, n, 1);
+
     for (int i = 0; i < n; i++)
     {
         cout << arr[i] << " ";
