@@ -159,6 +159,53 @@ vector<int> intersectionOptimized(vector<int> &v1, vector<int> &v2)
     return res;
 }
 
+int missingElement(vector<int> v1)
+{
+    // 1 0 3
+    // Brute: Sort and iterate
+    // Better: Hash
+    // Optimal 1: Sum of natural numbers (will use long or long long for sum)
+    // Optimal 2: XOR
+
+    int n = v1.size();
+    int xor1 = 0, xor2 = 0;
+    for (int i = 1; i <= n; i++)
+    {
+        xor1 = xor1 ^ i;
+        xor2 = xor2 ^ v1[i - 1];
+    }
+    return xor1 ^ xor2;
+    // TC: O(n)
+    // SC: O(1)
+}
+
+int singleNumber(vector<int> &v1)
+{
+    // Brute: Linear search for each element -> O(n^2)
+    // Better: Sort and iterate in 1 pass -> O(nlogn + n)
+    // Better: Hashing -> array, map, unordered map (extra space)
+    int n = v1.size();
+    unordered_map<int, int> mp;
+
+    for (int i = 0; i < n; i++)
+    {
+        mp[v1[i]]++;
+    }
+
+    for (auto i : mp)
+    {
+        if (i.second == 1)
+        {
+            return i.first;
+        }
+    }
+    return -1;
+    // TC: O(n) | O(n^2) in rare worst case -> switch to map (based on i/p)
+    // SC: O(n/2 + 1) -> since all elements are twice except one
+
+    // Optimal: XOR -> TC: O(n), SC: O(1)
+}
+
 int main()
 {
     // Max array of size 10^5 can be initialized (10^8 if initialized globally)
@@ -207,4 +254,10 @@ int main()
     for (auto i : res3)
         cout << i << " ";
     cout << endl;
+
+    // In an array of 0 to n
+    cout << missingElement(v1) << endl; // 0 1 4 3 -> 2
+
+    // Find single number other than which all other numbers appear twice
+    cout << singleNumber(v1) << endl; // 4 1 2 1 2 -> 4
 }
