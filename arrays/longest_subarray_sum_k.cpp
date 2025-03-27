@@ -18,6 +18,34 @@ int longestSubArrayWithSumK(vector<int> &v, int k)
         }
     }
     return maxLength;
+    // TC: O(n^2)
+    // SC: O(1)
+}
+
+int longestSubArrayWithSumK2(vector<int> &v, int k)
+{
+    int n = v.size();
+    unordered_map<long long, int> hash;
+    int maxLength = 0;
+    long long prefixSum = 0;
+    for (int i = 0; i < n; i++)
+    {
+        prefixSum += v[i];
+        if (prefixSum == k)
+        {
+            maxLength = max(maxLength, i + 1);
+        }
+        if (!hash[prefixSum - k])
+        {
+            hash[prefixSum] = i;
+        }
+
+        if (hash[prefixSum - k])
+        {
+            maxLength = max(maxLength, i - hash[prefixSum - k]);
+        }
+    }
+    return maxLength;
 }
 
 int main()
@@ -35,4 +63,7 @@ int main()
 
     // Brute
     cout << longestSubArrayWithSumK(v, k) << endl;
+
+    // Better using hashing
+    cout << longestSubArrayWithSumK2(v, k) << endl;
 }
