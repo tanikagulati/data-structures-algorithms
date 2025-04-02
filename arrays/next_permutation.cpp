@@ -43,6 +43,11 @@ void nextPermutation(vector<int> &v)
 int main()
 {
     vector<int> v = {2, 1, 5, 4, 3, 0, 0};
+    // Brute: Generate all using recursion and search
+
+    // Optimal: STL -> next_permutation
+
+    // Optimal impl
     nextPermutation(v);
     for (auto i : v)
     {
