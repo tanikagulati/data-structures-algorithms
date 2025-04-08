@@ -1,46 +1,67 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-void spiralMatrix(vector<vector<int>> &matrix)
+void spiralmat(vector<vector<int>> &mat)
 {
-    int n = matrix.size();
-    int m = matrix[0].size();
-    int j = 0;
+    int n = mat.size();
+    int m = mat[0].size();
+    int top = 0, bottom = n - 1;
+    int left = 0, right = m - 1;
 
     vector<int> res;
-    for (int i = 0; i <= n / 2; i++)
+
+    while (left <= right && top <= bottom)
     {
-        for (int j = i; j < m - i; j++)
+        // move right
+        for (int i = left; i <= right; i++)
         {
-            res.push_back(matrix[i][j]);
+            res.push_back(mat[top][i]);
         }
-        for (int j = i + 1; j < n - i; j++)
+        top++;
+        // move bottom
+        for (int i = top; i <= bottom; i++)
         {
-            res.push_back(matrix[j][m - i - 1]);
+            res.push_back(mat[i][right]);
         }
-        for (int j = m - i - 2; j >= i; j--)
+        right--;
+        // move left
+        if (top <= bottom) // Check because top was updated after while check (to handle horizontal line)
         {
-            res.push_back(matrix[n - i - 1][j]);
+            for (int i = right; i >= left; i--)
+            {
+                res.push_back(mat[bottom][i]);
+            }
         }
-        for (int j = n - i - 2; j > i; j--)
+
+        bottom--;
+        // move top
+        if (left <= right) // Check because right was updated afetr while check (to handle vertical line)
         {
-            res.push_back(matrix[j][i]);
+            for (int i = bottom; i >= top; i--)
+            {
+                res.push_back(mat[i][left]);
+            }
         }
+        left++;
     }
+
     for (auto i : res)
     {
         cout << i << " ";
     }
+
+    // TC: O(m*n)
+    // SC: O(m*n) // To save result
 }
 
 int main()
 {
-    vector<vector<int>> matrix = {{1, 2, 3, 4, 5}, {16, 17, 18, 19, 6}, {15, 24, 25, 20, 7}, {14, 23, 22, 21, 8}, {13, 12, 11, 10, 9}};
+    vector<vector<int>> mat = {{1, 2, 3, 4, 5}, {16, 17, 18, 19, 6}, {15, 24, 25, 20, 7}, {14, 23, 22, 21, 8}, {13, 12, 11, 10, 9}};
     // 1  2  3  4  5
     // 16 17 18 19 6
     // 15 24 25 20 7
     // 14 23 22 21 8
     // 13 12 11 10 9
 
-    spiralMatrix(matrix);
+    spiralmat(mat);
 }
