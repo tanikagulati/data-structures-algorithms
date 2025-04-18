@@ -14,31 +14,29 @@ int searchInRotatedSortedArray(vector<int> &v, int target)
             return mid;
         }
         // What next? Eliminate one half -> Identify sorted half of the array and check for target
-        else
+
+        // Left sorted
+        if (v[low] <= v[mid])
         {
-            // Left sorted
-            if (v[low] <= v[mid])
+            if (v[low] <= target && target < v[mid])
             {
-                if (v[low] <= target && target < v[mid])
-                {
-                    high = mid - 1;
-                }
-                else
-                {
-                    low = mid + 1;
-                }
+                high = mid - 1;
             }
-            // Right sorted
             else
             {
-                if (v[mid] < target && target <= v[high])
-                {
-                    low = mid + 1;
-                }
-                else
-                {
-                    high = mid - 1;
-                }
+                low = mid + 1;
+            }
+        }
+        // Right sorted
+        else
+        {
+            if (v[mid] < target && target <= v[high])
+            {
+                low = mid + 1;
+            }
+            else
+            {
+                high = mid - 1;
             }
         }
     }
@@ -62,38 +60,34 @@ bool searchInRotatedSortedArray2(vector<int> &v, int target)
             return true;
         }
 
-        // To handle an edge case where sorted half cannot be determined
+        // To handle an edge case where sorted half cannot be determined, eg. (1,1,0,1)
         if (v[low] == v[mid] && v[mid] == v[high])
         {
             low++, high--;
             continue;
         }
-
-        else
+        // Left sorted
+        if (v[low] <= v[mid])
         {
-            // Left sorted
-            if (v[low] <= v[mid])
+            if (v[low] <= target && target < v[mid])
             {
-                if (v[low] <= target && target < v[mid])
-                {
-                    high = mid - 1;
-                }
-                else
-                {
-                    low = mid + 1;
-                }
+                high = mid - 1;
             }
-            // Right sorted
             else
             {
-                if (v[mid] < target && target <= v[high])
-                {
-                    low = mid + 1;
-                }
-                else
-                {
-                    high = mid - 1;
-                }
+                low = mid + 1;
+            }
+        }
+        // Right sorted
+        else
+        {
+            if (v[mid] < target && target <= v[high])
+            {
+                low = mid + 1;
+            }
+            else
+            {
+                high = mid - 1;
             }
         }
     }
