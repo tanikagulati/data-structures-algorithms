@@ -28,6 +28,9 @@ int peakElement(vector<int> &v)
             low = mid + 1;
         }
         else
+        // what if you write an else if(v[mid+1] < v[mid]) here?
+        // It will cause an infinite loop if mid = dip
+        // eg. [1 5 1 2 1]
         {
             high = mid - 1;
         }
