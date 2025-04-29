@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int findSimgleElement(vector<int> &v)
+int findSingleElement(vector<int> &v)
 {
     int n = v.size();
 
@@ -45,5 +45,5 @@ int main()
     vector<int> v = {1, 1, 2, 2, 3, 4, 4};
 
     // Observation: Even odd indices
-    cout << findSimgleElement(v) << endl;
+    cout << findSingleElement(v) << endl;
 }
