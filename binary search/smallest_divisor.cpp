@@ -28,6 +28,10 @@ long long sumAfterDivision(vector<int> &nums, int mid)
 int smallestDivisor(vector<int> &nums, int threshold)
 {
     int n = nums.size();
+
+    if (threshold < n)
+        return -1;
+
     int low = 1, high = findMax(nums), mid;
     long long val;
 
