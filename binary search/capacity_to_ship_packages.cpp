@@ -48,7 +48,7 @@ int findLeastCapacity(vector<int> &weights, int d)
 {
     int n = weights.size();
     int low = findMax(weights);
-    int high = findSum(weights);
+    int high = findSum(weights); // shortcut: use stl accumulate method
     int mid;
     int daysRequired;
 
@@ -67,6 +67,9 @@ int findLeastCapacity(vector<int> &weights, int d)
     }
 
     return low;
+
+    // TC: O(sum-max+1) * O(n)
+    // SC: O(1)
 }
 
 int main()
