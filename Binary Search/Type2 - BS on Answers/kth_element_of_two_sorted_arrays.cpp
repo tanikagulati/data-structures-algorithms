@@ -10,9 +10,10 @@ int kthElementOfTwoSortedArrays(vector<int> &nums1, vector<int> &nums2, int k)
         return kthElementOfTwoSortedArrays(nums2, nums1, k);
     }
     int n = n1 + n2;
-    int low = max(k - n2, 0), high = min(k, n1);
+    int low = max(k - n2, 0); // If k>n1, atleast k-n2 elements has to be picked from nums1, then rest from nums2
+    int high = min(k, n1);    // If k<n1, atmost k can be picked from nums1
     int mid1, mid2;
-    int elementsInLeft = k;
+    int elementsInLeft = k; // k in left half, remaining in right half
     int l1, l2, r1, r2;
 
     while (low <= high)
