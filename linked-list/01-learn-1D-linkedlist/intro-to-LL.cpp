@@ -77,5 +77,16 @@ int main()
     cout << checkIfPresent(head, 3) << endl;
 }
 
-// NULL (old C style) and nullptr(introduced in C++11) can be used interchangeably in LL pointer stuff but nullptr is preferred.
-// Because NULL can lead to ambiguous overload resolution in functions that take either an integer or a pointer; whereas nullptr clearly represents a pointer literal.
+/*
+NULL vs nullptr:---
+NULL (old C style) and nullptr(introduced in C++11) can be used interchangeably in LL pointer stuff but nullptr is preferred.
+Because NULL can lead to ambiguous overload resolution in functions that take either an integer or a pointer; whereas nullptr clearly represents a pointer literal.
+*/
+
+/*
+Allocation and deallocation:---
+If allocation is via new, deallocate using delete -> recommended
+ - Allocation: Node *node = new Node(5, nullptr);
+ - Deallocation: delete node;
+If allocation is via malloc, calloc, deallocate using free(node) -> old C-style
+*/

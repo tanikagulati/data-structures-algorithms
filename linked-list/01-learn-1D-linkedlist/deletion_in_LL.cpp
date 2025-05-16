@@ -24,6 +24,7 @@ void printLL(Node *head)
         temp = temp->next;
     }
     cout << endl;
+    // TC: O(n)
 }
 
 Node *createLL()
@@ -39,6 +40,7 @@ Node *createLL()
         mover = temp;
     }
     return head;
+    // TC: O(n)
 }
 
 Node *deleteHead(Node *head)
@@ -48,8 +50,9 @@ Node *deleteHead(Node *head)
 
     Node *temp = head;
     head = head->next;
-    free(temp);
+    delete temp;
     return head;
+    // TC: O(1)
 }
 
 Node *deleteTail(Node *head)
@@ -61,7 +64,7 @@ Node *deleteTail(Node *head)
 
     if (temp->next == nullptr) // If there is only one element
     {
-        free(temp);
+        delete temp;
         return nullptr;
     }
 
@@ -69,9 +72,10 @@ Node *deleteTail(Node *head)
     {
         temp = temp->next;
     }
-    free(temp->next);
+    delete temp->next;
     temp->next = nullptr;
     return head;
+    // TC: O(n)
 }
 
 Node *deleteKthElement(Node *head, int k)
@@ -85,11 +89,11 @@ Node *deleteKthElement(Node *head, int k)
     if (k == 1)
     {
         head = head->next;
-        free(temp);
+        delete temp;
         return head;
     }
 
-    int cnt = 1;
+    int cnt = 0;
     Node *prev = head;
     while (temp)
     {
@@ -97,13 +101,14 @@ Node *deleteKthElement(Node *head, int k)
         if (cnt == k)
         {
             prev->next = prev->next->next;
-            free(temp);
+            delete temp;
             break;
         }
         prev = temp;
         temp = temp->next;
     }
     return head;
+    // TC: O(n)
 }
 
 Node *deleteElement(Node *head, int k)
@@ -115,7 +120,7 @@ Node *deleteElement(Node *head, int k)
     if (head->data == k)
     {
         head = head->next;
-        free(temp);
+        delete temp;
         return head;
     }
     Node *prev = head;
@@ -124,13 +129,14 @@ Node *deleteElement(Node *head, int k)
         if (temp->data == k)
         {
             prev->next = prev->next->next;
-            free(temp);
+            delete temp;
             break;
         }
         prev = temp;
         temp = temp->next;
     }
     return head;
+    // TC: O(n)
 }
 
 int main()
