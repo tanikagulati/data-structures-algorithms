@@ -76,3 +76,6 @@ int main()
     // Search in LL
     cout << checkIfPresent(head, 3) << endl;
 }
+
+// NULL (old C style) and nullptr(introduced in C++11) can be used interchangeably in LL pointer stuff but nullptr is preferred.
+// Because NULL can lead to ambiguous overload resolution in functions that take either an integer or a pointer; whereas nullptr clearly represents a pointer literal.
