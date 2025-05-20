@@ -87,7 +87,7 @@ Node *oddEvenLLOptimal(Node *head)
     }
     odd->next = evenHead;
     return head;
-    // TC: (O(n/2)*2) = O(n) -> Imp
+    // TC: (O(n/2)*2) = O(n) -> Because each node is visited once -> Imp
     // SC: O(1)
 }
 
