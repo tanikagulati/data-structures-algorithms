@@ -36,32 +36,27 @@ Node *createLL(int arr[], int n)
         mover->next = temp;
         mover = temp;
     }
+    // mover->next = head->next; // -> For cycle
     return head;
 }
 
-Node *middleOfLLBrute(Node *head)
+bool detectCycleBrute(Node *head)
 {
-    if (head == NULL || head->next == NULL)
-        return head;
     Node *temp = head;
-    int cnt = 0;
+    map<Node *, int> mp;
     while (temp)
     {
-        cnt++;
+        if (mp[temp] == 1)
+            return true;
+        mp[temp] = 1;
         temp = temp->next;
     }
-    int mid = (cnt / 2) + 1;
-    temp = head;
-    while (--mid)
-    {
-        temp = temp->next;
-    }
-    return temp;
-    // TC: O(n + n/2)
-    // SC: O(1)
+    return false;
+    // TC: O(n * 2 * logn)
+    // SC: O(n)
 }
 
-Node *middleOfLLOptimal(Node *head)
+bool detectCycleOptimal(Node *head)
 {
     Node *slow = head;
     Node *fast = head;
@@ -69,23 +64,26 @@ Node *middleOfLLOptimal(Node *head)
     {
         slow = slow->next;
         fast = fast->next->next;
+        if (slow == fast) // Bound to meet if cycle exists
+        {
+            return true;
+        }
     }
-    return slow;
-    // TC: O(n/2)
+    return false;
+    // TC: ~O(n)
     // SC: O(1)
 }
 
 int main()
 {
-    int n = 5;
-    int arr[n] = {2, 6, 3, 9, 1};
+    int n = 6;
+    int arr[n] = {1, 2, 3, 4, 5, 6};
     Node *head = createLL(arr, n);
-    printLL(head);
+    // printLL(head); // Can't print if cycle exists (endless LL)
 
-    Node *mid = middleOfLLBrute(head);
-    cout << mid->data << endl;
+    // Brute: Hashing visited node
+    cout << detectCycleBrute(head) << endl;
 
-    // Optimal: Tortoise & hare (TH) method (Slow & fast pointers)
-    mid = middleOfLLOptimal(head);
-    cout << mid->data << endl;
+    // Optimal: TH method
+    cout << detectCycleOptimal(head) << endl;
 }
