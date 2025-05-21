@@ -64,7 +64,7 @@ bool checkIfPalindromeBrute(Node *head)
 }
 
 Node *reverseLL(Node *head)
-{ // 1 2 3
+{
     Node *temp = head;
     Node *prev = nullptr;
     while (temp)
@@ -74,7 +74,6 @@ Node *reverseLL(Node *head)
         prev = temp;
         temp = next;
     }
-    printLL(prev);
     return prev;
 }
 
