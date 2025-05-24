@@ -57,7 +57,7 @@ Node *reverseLL(Node *head)
     // SC: O(1)
 }
 
-Node *addOneToLLBrute(Node *head)
+Node *addOneToLLIterative(Node *head)
 {
     head = reverseLL(head);
     int carry = 1;
@@ -81,13 +81,42 @@ Node *addOneToLLBrute(Node *head)
     // SC: O(1)
 }
 
+int addOne(Node *head)
+{
+    if (head == NULL)
+        return 1;
+    int carry = addOne(head->next);
+    int num = head->data + carry;
+    head->data = num % 10;
+    return num / 10;
+}
+
+Node *addOneToLLRecursive(Node *head)
+{
+    int carry = addOne(head);
+    if (carry == 1)
+    {
+        return new Node(1, head);
+    }
+    return head;
+    // TC: O(n)
+    // SC: O(n)
+}
+
 int main()
 {
     int n = 4;
-    int arr[n] = {9, 9, 9, 9};
+    int arr[n] = {9, 9, 8, 9};
     Node *head = createLL(arr, n);
     printLL(head);
 
-    head = addOneToLLBrute(head);
+    // head = addOneToLLIterative(head);
+    // printLL(head);
+
+    head = addOneToLLRecursive(head);
     printLL(head);
+
+    // Which one is optimal? Both has pros and cons:
+    // Iterative is slower but no extra space. Also, it includes tampering of data
+    // Recursive is faster but uses extra space
 }
