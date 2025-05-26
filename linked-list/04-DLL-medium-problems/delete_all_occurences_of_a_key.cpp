@@ -43,44 +43,30 @@ Node *convertArrToDLL(int arr[], int n)
     // TC: O(n)
 }
 
-Node *deleteAllOcuurences(Node *head, int k)
+Node *deleteAllOccurences(Node *head, int k)
 {
+    if (head == NULL)
+        return head;
     Node *temp = head;
-    Node *prev = nullptr;
     while (temp)
     {
+        Node *next = temp->next;
+        Node *prev = temp->prev;
         if (temp->data == k)
         {
             if (temp == head)
             {
-                head = temp->next;
-                temp->next = nullptr;
-                delete temp;
-                head->prev = nullptr;
-                temp = head;
+                head = next;
             }
-            else if (temp->next == NULL)
-            {
-                temp->prev = nullptr;
-                delete temp;
-                prev->next = nullptr;
-                return head;
-            }
-            else
-            {
-                temp->prev = nullptr;
-                prev->next = temp->next;
-                temp->next->prev = prev;
-                temp->next = nullptr;
-                delete temp;
-                temp = prev->next;
-            }
+            if (prev)
+                prev->next = next;
+            if (next)
+                next->prev = prev;
+            delete temp;
+            temp = next;
         }
         else
-        {
-            prev = temp;
             temp = temp->next;
-        }
     }
     return head;
     // TC: O(n)
@@ -90,10 +76,10 @@ Node *deleteAllOcuurences(Node *head, int k)
 int main()
 {
     int n = 3;
-    int arr[n] = {3, 3, 3};
+    int arr[n] = {2, 3, 3};
     Node *head = convertArrToDLL(arr, n);
     printDLL(head);
 
-    head = deleteAllOcuurences(head, 3);
+    head = deleteAllOccurences(head, 3);
     printDLL(head);
 }
