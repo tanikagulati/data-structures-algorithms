@@ -66,7 +66,9 @@ Node *deleteAllOccurences(Node *head, int k)
             temp = next;
         }
         else
+        {
             temp = temp->next;
+        }
     }
     return head;
     // TC: O(n)

@@ -45,29 +45,27 @@ Node *convertArrToDLL(int arr[], int n)
 
 Node *removeDuplicates(Node *head)
 {
-    {
-        if (head == NULL || head->next == NULL)
-            return head;
-        Node *temp = head;
-        while (temp && temp->next)
-        {
-            Node *next = temp->next;
-            while (next != NULL && temp->data == next->data)
-            {
-                Node *duplicate = next;
-                next = next->next;
-                delete duplicate;
-            }
-            temp->next = next;
-            if (next)
-                next->prev = temp;
-
-            temp = temp->next;
-        }
+    if (head == NULL || head->next == NULL)
         return head;
-        // TC: O(n) (Each node is visited only once)
-        // SC: O(1)
+    Node *temp = head;
+    while (temp && temp->next)
+    {
+        Node *next = temp->next;
+        while (next != NULL && temp->data == next->data)
+        {
+            Node *duplicate = next;
+            next = next->next;
+            delete duplicate;
+        }
+        temp->next = next;
+        if (next)
+            next->prev = temp;
+
+        temp = temp->next;
     }
+    return head;
+    // TC: O(n) (Each node is visited only once)
+    // SC: O(1)
 }
 
 int main()
