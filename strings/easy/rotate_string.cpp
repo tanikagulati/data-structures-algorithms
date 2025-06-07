@@ -35,7 +35,7 @@ bool rotateString(string s, string goal)
 
     for (int i = 1; i < s.size(); i++)
     {
-        // Can also use stl for rotation
+        // Use stl for rotation (it's inplace -> will reduce the SC to O(1))
         if (rotate(s, i) == goal)
         {
             return true;
