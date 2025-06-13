@@ -4,7 +4,7 @@ using namespace std;
 int myAtoi(string s)
 {
     bool positive = true;
-    long res = 0;
+    long long res = 0;
     int i = 0;
     int n = s.size();
     while (i < n && s[i] == ' ')
@@ -24,12 +24,12 @@ int myAtoi(string s)
     {
         i++;
     }
-    while (res < 0 <= s[i] - '0' && s[i] - '0' <= 9)
+    while (i < n && 0 <= s[i] - '0' && s[i] - '0' <= 9)
     {
         res = (res * 10) + s[i] - '0';
         if (positive && res > INT_MAX)
             return INT_MAX;
-        if (!positive && -res < INT_MIN)
+        if (!positive && res > INT_MAX + 1)
             return INT_MIN;
         i++;
     }
