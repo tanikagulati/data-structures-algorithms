@@ -37,7 +37,14 @@ void sortStack(stack<int> &s)
 int main()
 {
     stack<int> s;
+    s.push(11);
+    s.push(6);
+    s.push(8);
+    s.push(17);
 
+    // Brute: Copy stack into array, sort it, and push into stack
+
+    // Optimal:
     sortStack(s);
 
     while (!s.empty())
