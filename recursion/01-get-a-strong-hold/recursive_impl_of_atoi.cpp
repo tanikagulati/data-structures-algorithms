@@ -10,13 +10,14 @@ int findNumber(string &s, int i, bool negative, int res)
         return negative ? -res : res;
     }
 
-    res = (res * 10) + s[i] - '0';
-    if (negative && -res < INT_MIN)
+    long long temp = ((long long)res * 10) + s[i] - '0';
+
+    if (negative && temp > (long long)INT_MAX)
         return INT_MIN;
-    if (!negative && res > INT_MAX)
+    if (!negative && temp > INT_MAX)
         return INT_MAX;
 
-    return findNumber(s, i + 1, negative, res);
+    return findNumber(s, i + 1, negative, (int)temp);
 }
 
 int myAtoi(string s)
@@ -46,5 +47,5 @@ int myAtoi(string s)
 
 int main()
 {
-    cout << myAtoi("  +234") << endl;
+    cout << myAtoi("-2147483648") << endl;
 }
