@@ -28,12 +28,36 @@ vector<vector<int>> generateAllSubsequences(vector<int> &nums)
     // SC: O(2^n * n) -> For answer
 }
 
+void generateAllSubsequences2(vector<int> &nums, vector<vector<int>> &res, vector<int> &temp, int index)
+{
+    if (index == nums.size())
+    {
+        res.push_back(temp);
+        return;
+    }
+
+    // Exclude the current element
+    generateAllSubsequences2(nums, res, temp, index + 1);
+    // Include the current element
+    temp.push_back(nums[index]);
+    generateAllSubsequences2(nums, res, temp, index + 1);
+    temp.pop_back();
+    // TC: O(2^n)
+    // SC: O(2^n * n) -> For answer + O(n) -> Recursion stack space
+}
+
 int main()
 {
     vector<int> nums = {1, 2, 3};
     vector<vector<int>> res;
+
     // Using bits logic
     res = generateAllSubsequences(nums);
+
+    // Using recursion (Pick / Don't pick)
+    res = {};
+    vector<int> temp = {};
+    generateAllSubsequences2(nums, res, temp, 0);
 
     for (auto i : res)
     {
@@ -44,6 +68,12 @@ int main()
         cout << endl;
     }
 }
+
+/*
+Which one is optimal?
+- Use bits for raw performance and when elements are distinct and there are no constraints.
+- Use recursion when the problem has filters, duplicate handling, or side conditions.
+*/
 
 /*
 0 -> 00
