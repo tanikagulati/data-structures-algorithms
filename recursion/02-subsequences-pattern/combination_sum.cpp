@@ -1,6 +1,9 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// Given an array of distinct integers candidates and a target integer, return a list of all unique combinations of candidates where the chosen numbers sum to target.
+// The same number may be chosen from candidates an unlimited number of times.
+
 void combinationSum(vector<int> &candidates, int target, int index, vector<int> &temp, vector<vector<int>> &res)
 {
     // target == 0 can be a base case, but this is the generalized version (avoiding too many conditions)
