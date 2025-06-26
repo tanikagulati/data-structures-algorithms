@@ -7,14 +7,16 @@ using namespace std;
 void subsetSum2(vector<int> &v, int index, vector<int> &temp, vector<vector<int>> &res)
 {
     res.push_back(temp);
-    if (index == v.size())
-    {
-        return;
-    }
+
+    // Base case not required, as for loop will handle it
+    // if (index == v.size())
+    // {
+    //     return;
+    // }
 
     for (int i = index; i < v.size(); i++)
     {
-        if (i > index && temp[i] == temp[i - 1])
+        if (i > index && v[i] == v[i - 1])
         {
             continue;
         }
@@ -32,6 +34,8 @@ int main()
     vector<int> temp;
     vector<vector<int>> res;
 
+    // Sort for managing duplicates in recursion
+    sort(v.begin(), v.end()); // Additional nlogn
     subsetSum2(v, 0, temp, res);
 
     for (auto i : res)
