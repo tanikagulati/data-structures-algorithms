@@ -1,6 +1,10 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// Given a collection of candidate numbers and a target number, find all unique combinations in candidates where the candidate numbers sum to target.
+// Each number in candidates may only be used once in the combination.
+// Note: The solution set must not contain duplicate combinations.
+
 void combinationSum2Brute(vector<int> &candidates, int target, int index, vector<int> &temp, set<vector<int>> &res)
 {
     if (index == candidates.size())
@@ -30,7 +34,7 @@ void combinationSum2Optimal(vector<int> &candidates, int target, int index, vect
         res.push_back(temp);
         return;
     }
-    for (int i = index; i < candidates.size() - 1; i++)
+    for (int i = index; i < candidates.size(); i++)
     {
         if (i > index && candidates[i] == candidates[i - 1]) // For unique combinations
             continue;
