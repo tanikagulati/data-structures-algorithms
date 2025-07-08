@@ -1,7 +1,10 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// Infix to postfix expression conversion
+// Infix to prefix expression conversion
+
+// Reverse the expression -> Infix to postfix -> Reverse the ans
+// (with some tweaks)
 
 int priority(char c)
 {
@@ -15,8 +18,22 @@ int priority(char c)
         return -1;
 }
 
-string infixToPostfix(string &exp)
+void reverseExp(string &exp)
 {
+    reverse(exp.begin(), exp.end());
+
+    for (char &c : exp) // &c for in-place modification
+    {
+        if (c == '(')
+            c = ')';
+        else if (c == ')')
+            c = '(';
+    }
+}
+
+string infixToPrefix(string &exp)
+{
+    reverseExp(exp);
     stack<char> st;
     string ans;
     for (int i = 0; i < exp.size(); i++)
@@ -42,10 +59,21 @@ string infixToPostfix(string &exp)
             }
             else
             {
-                while (!st.empty() && priority(exp[i]) <= priority(st.top()))
+                if (exp[i] == '^')
                 {
-                    ans += st.top();
-                    st.pop();
+                    while (!st.empty() && priority(exp[i] <= priority(st.top())))
+                    {
+                        ans += st.top();
+                        st.pop();
+                    }
+                }
+                else
+                {
+                    while (!st.empty() && priority(exp[i]) < priority(st.top()))
+                    {
+                        ans += st.top();
+                        st.pop();
+                    }
                 }
                 st.push(exp[i]);
             }
@@ -56,13 +84,14 @@ string infixToPostfix(string &exp)
         ans += st.top();
         st.pop();
     }
+    reverseExp(ans);
     return ans;
-    // TC: O(2n) -> considering while loops
+    // TC: O(3n) -> considering while loops + reverse
     // SC: O(2n) -> stack + ans
 }
 
 int main()
 {
     string exp = "a+b-c*(d/e+f)";
-    cout << infixToPostfix(exp) << endl;
+    cout << infixToPrefix(exp) << endl;
 }
