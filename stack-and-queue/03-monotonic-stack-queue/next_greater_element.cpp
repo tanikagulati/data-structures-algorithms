@@ -1,6 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// https://leetcode.com/problems/next-greater-element-i/description/
+
 vector<int> nextGreaterElement(vector<int> &nums1, vector<int> &nums2)
 {
     int n = nums2.size();
@@ -28,6 +30,8 @@ vector<int> nextGreaterElement(vector<int> &nums1, vector<int> &nums2)
         res.push_back(nge[i]);
     }
     return res;
+    // TC: O(2*n2 + n1)
+    // SC: O(n1+n2) -> map and stack
 }
 
 int main()
@@ -41,5 +45,5 @@ int main()
     vector<int> ans = nextGreaterElement(nums1, nums2);
 
     for (auto i : ans)
-        cout << i << endl;
+        cout << i << " ";
 }

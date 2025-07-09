@@ -1,6 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// https://leetcode.com/problems/min-stack/description/
+
 class StackImpl
 {
     stack<pair<int, int>> st;
