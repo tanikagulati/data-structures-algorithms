@@ -37,28 +37,30 @@ int largestRectangleInHistogram(vector<int> &heights)
     // SC: O(n)
 }
 
-int maximalRectangle(vector<vector<int>> &matrix)
+int maximalRectangle(vector<vector<char>> &matrix)
 {
     int n = matrix.size();
     int m = matrix[0].size();
+    // Breakdown matrix into bar heights (each row as histogram)
     vector<vector<int>> prefixSum(n, vector<int>(m));
     for (int col = 0; col < m; col++)
     {
         int sum = 0;
         for (int row = 0; row < n; row++)
         {
-            if (matrix[row][col] == 0)
+            if (matrix[row][col] - '0' == 0)
             {
                 sum = 0;
             }
             else
             {
-                sum += matrix[row][col];
+                sum += matrix[row][col] - '0';
             }
             prefixSum[row][col] = sum;
         }
     }
     int maxArea = 0;
+    // Find largest rectangle for each row
     for (int i = 0; i < prefixSum.size(); i++)
     {
         maxArea = max(maxArea, largestRectangleInHistogram(prefixSum[i]));
@@ -70,5 +72,9 @@ int maximalRectangle(vector<vector<int>> &matrix)
 
 int main()
 {
-    vector<vector<int>> matrix = {{'1', '0', '1', '0', '0'}, {'1', '0', '1', '1', '1'}, {'1', '1', '1', '1', '1'}, {'1', '0', '0', '1', '0'}};
+    vector<vector<char>> matrix = {{0}};
+
+    cout << maximalRectangle(matrix) << endl;
+
+    // Optimization: a single row can be reused 1 by 1, instead of 2D prefixSum
 }
