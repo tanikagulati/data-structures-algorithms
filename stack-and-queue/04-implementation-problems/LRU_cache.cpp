@@ -19,7 +19,7 @@ public:
     }
 };
 
-void deleteNode(Node *dummyHead, Node *temp)
+void deleteNode(Node *temp)
 {
     temp->prev->next = temp->next;
     temp->next->prev = temp->prev;
@@ -55,7 +55,7 @@ public:
         auto it = mp.find(key);
         if (it == mp.end())
             return -1;
-        deleteNode(dummyHead, it->second);
+        deleteNode(it->second);
         insertAtFront(dummyHead, it->second);
         return it->second->val;
         // TC: O(1)
@@ -68,7 +68,7 @@ public:
         {
             temp = mp[key];
             temp->val = val;
-            deleteNode(dummyHead, temp);
+            deleteNode(temp);
             insertAtFront(dummyHead, temp);
         }
         else
@@ -78,7 +78,7 @@ public:
                 // delete LRU
                 mp.erase(mp.find(dummyTail->prev->key));
                 Node *toBeDeleted = dummyTail->prev;
-                deleteNode(dummyHead, toBeDeleted);
+                deleteNode(toBeDeleted);
                 delete toBeDeleted;
             }
             temp = new Node(key, val);
