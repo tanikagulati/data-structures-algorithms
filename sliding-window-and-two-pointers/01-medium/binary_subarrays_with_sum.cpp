@@ -3,8 +3,9 @@ using namespace std;
 
 // https://leetcode.com/problems/binary-subarrays-with-sum/description/
 
-int numSubarraysWithSum(vector<int> nums, int k)
+int countSubarraysWithSumLTE(vector<int> &nums, int k)
 {
+    // Count subarrays with sum less than or equal to k
     if (k < 0)
         return 0;
     int n = nums.size();
@@ -32,5 +33,7 @@ int main()
     vector<int> nums = {1, 0, 1, 0, 1};
     int goal = 2;
 
-    cout << numSubarraysWithSum(nums, goal) - numSubarraysWithSum(nums, goal - 1) << endl;
+    cout << countSubarraysWithSumLTE(nums, goal) - countSubarraysWithSumLTE(nums, goal - 1) << endl;
+    // TC: O(4n)
+    // SC: O(1)
 }
