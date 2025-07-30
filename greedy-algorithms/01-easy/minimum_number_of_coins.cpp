@@ -5,7 +5,7 @@ using namespace std;
 
 vector<int> minNumberOfCoins(int n)
 {
-    vector<int> coins = {1, 2, 5, 10, 20, 50, 100, 200, 500, 1000, 2000};
+    vector<int> coins = {1, 2, 5, 10, 20, 50, 100, 200, 500, 2000};
     vector<int> ans;
     int size = coins.size();
 
@@ -33,5 +33,5 @@ int main()
         cout << i << " ";
 }
 
-// Note: Greedy approach here is possible because in the given denomination (coins), sum of two coins is always <= next coin
+// Note: Greedy approach here is possible because in the given denomination (coins), prefix sum of coins is always <= current coin
 // If coins were randomly given in input, this approach would fail
