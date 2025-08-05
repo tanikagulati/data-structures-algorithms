@@ -1,19 +1,6 @@
 #include <bits/stdc++.h>
+#include "../TreeNode.h"
 using namespace std;
-
-struct Node
-{
-    int data;
-    struct Node *left;
-    struct Node *right;
-
-    Node(int val)
-    {
-        data = val;
-        left = NULL;
-        right = NULL;
-    }
-};
 
 void preorder(Node *root)
 {
@@ -58,4 +45,7 @@ int main()
     inorder(root);
     cout << endl;
     postorder(root);
+
+    // TC: O(n)
+    // SC: O(n)
 }
