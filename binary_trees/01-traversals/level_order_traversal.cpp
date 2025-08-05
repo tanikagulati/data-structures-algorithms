@@ -2,9 +2,13 @@
 #include "../TreeNode.h"
 using namespace std;
 
+// https://leetcode.com/problems/binary-tree-level-order-traversal/description/
+
 vector<vector<int>> levelOrder(Node *root)
 {
     vector<vector<int>> ans;
+    if (root == NULL)
+        return ans;
     queue<Node *> q;
     q.push(root);
     while (!q.empty())
