@@ -20,18 +20,21 @@ vector<vector<int>> zigzagLevelOrder(Node *root)
         {
             Node *temp = q.front();
             q.pop();
+
             if (temp->left)
                 q.push(temp->left);
             if (temp->right)
                 q.push(temp->right);
 
-            int index = leftToRight ? i : i - size - 1;
+            int index = leftToRight ? i : size - i - 1;
             v[index] = temp->data;
         }
         res.push_back(v);
         leftToRight = !leftToRight;
     }
     return res;
+    // TC: O(n)
+    // SC: O(n)
 }
 
 int main()
