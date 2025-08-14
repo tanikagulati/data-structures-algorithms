@@ -2,6 +2,8 @@
 #include "../TreeNode.h"
 using namespace std;
 
+// Similar: https://www.geeksforgeeks.org/problems/root-to-leaf-paths/1
+
 bool rootToNodePath(Node *root, Node *target, vector<int> &res)
 {
     if (!root)
