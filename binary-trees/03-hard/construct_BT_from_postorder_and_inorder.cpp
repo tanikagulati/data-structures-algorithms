@@ -4,9 +4,10 @@ using namespace std;
 
 // https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/description/
 
-Node *construct(vector<int> &postorder, unordered_map<int, int> &hash, int postSt, int postEnd, int inSt, int inEnd)
+Node *construct(vector<int> &postorder, unordered_map<int, int> &hash,
+                int postSt, int postEnd, int inSt, int inEnd)
 {
-    if (postSt > postEnd || inSt < inEnd)
+    if (postSt > postEnd || inSt > inEnd)
         return NULL;
 
     Node *root = new Node(postorder[postEnd]);
@@ -45,7 +46,7 @@ void traverse(Node *root)
 
 int main()
 {
-    vector<int> inorder = {9, 13, 15, 20, 7};
+    vector<int> inorder = {9, 3, 15, 20, 7};
     vector<int> postorder = {9, 15, 7, 20, 3};
 
     Node *root = buildTree(postorder, inorder);
