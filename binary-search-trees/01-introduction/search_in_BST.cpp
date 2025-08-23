@@ -3,6 +3,8 @@
 using namespace std;
 
 // BST: L < N < R (For each node)
+// All nodes in left subtree should be smaller than node
+// All nodes in right subtree should be greater than node
 
 // https://leetcode.com/problems/search-in-a-binary-search-tree/description/
 
