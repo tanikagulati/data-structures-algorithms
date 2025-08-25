@@ -56,6 +56,60 @@ int floor(Node *root, int k)
     // SC: O(1)
 }
 
+void inorder(Node *root, vector<int> &in)
+{
+    if (!root)
+        return;
+    inorder(root->left, in);
+    in.push_back(root->data);
+    inorder(root->right, in);
+}
+
+vector<int> floorAndCeil(vector<int> &v, int k)
+{
+    vector<int> ans(2, -1);
+    int n = v.size();
+    int l = 0, h = n - 1;
+    while (l <= h)
+    {
+        int mid = l + (h - l) / 2;
+        if (v[mid] == k)
+        {
+            ans[0] = ans[1] = k;
+            break;
+        }
+        else if (v[mid] > k)
+        {
+            ans[1] = v[mid];
+            h = mid - 1;
+        }
+        else
+        {
+            ans[0] = v[mid];
+            l = mid + 1;
+        }
+    }
+    return ans;
+    // TC: O(log n)
+    // SC: O(1)
+}
+
+vector<vector<int>> closestNodes(Node *root, vector<int> &queries)
+{
+    // Find inorder of BST, which will be sorted
+    // Apply binary search to find floor and ceil for each query
+    vector<vector<int>> ans;
+    vector<int> in;
+    inorder(root, in);
+    for (auto i : queries)
+    {
+        ans.push_back(floorAndCeil(in, i));
+    }
+    return ans;
+    // TC: O(n + qlogn)
+    // SC: O(n)
+}
+
 int main()
 {
     struct Node *root = new Node(6);
@@ -69,4 +123,21 @@ int main()
 
     cout << ceil(root, 10) << endl;
     cout << floor(root, 10) << endl;
+
+    // Find floor and ceil for each query
+    vector<int> queries = {2, 5, 16};
+
+    // Brute:
+    // Find floor and ceil for each query (in one go)
+    // TC: O(q*n) (considering skewed trees)
+    // SC: O(1)
+
+    // Optimal:
+    vector<vector<int>> ans = closestNodes(root, queries);
+    for (auto i : ans)
+    {
+        for (auto j : i)
+            cout << j << " ";
+        cout << endl;
+    }
 }
