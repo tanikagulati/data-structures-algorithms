@@ -18,7 +18,7 @@ void recover(Node *root)
         {
             first = previous;
             mid = root;
-            // why keep track of mid?
+            // Why keep track of mid?
             // If the two violated nodes are adjacent, the second violation won't be captured later, so it needs to be stored
         }
         // Second violation
@@ -56,7 +56,7 @@ int main()
 
     if (first && last)
         swap(first->data, last->data);
-    else
+    else if (first && mid)
         swap(first->data, mid->data);
 
     traverse(root); // To verify
