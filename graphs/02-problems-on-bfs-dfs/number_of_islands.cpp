@@ -2,6 +2,7 @@
 using namespace std;
 
 // https://leetcode.com/problems/number-of-islands/description/
+// Connected components problem in matrix
 
 void bfs(int row, int col, vector<vector<char>> &grid, vector<vector<bool>> &vis)
 {
@@ -10,6 +11,9 @@ void bfs(int row, int col, vector<vector<char>> &grid, vector<vector<bool>> &vis
     queue<pair<int, int>> q;
     q.push({row, col});
     vis[row][col] = 1;
+
+    int delR[] = {-1, 0, 1, 0};
+    int delC[] = {0, 1, 0, -1};
 
     while (!q.empty())
     {
@@ -36,8 +40,6 @@ void bfs(int row, int col, vector<vector<char>> &grid, vector<vector<bool>> &vis
         // }
 
         // else
-        int delR[] = {-1, 0, 1, 0};
-        int delC[] = {0, 1, 0, -1};
         for (int k = 0; k < 4; k++)
         {
             int nborRow = row + delR[k];
