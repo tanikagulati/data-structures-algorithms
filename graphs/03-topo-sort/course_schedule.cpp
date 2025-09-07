@@ -4,7 +4,7 @@ using namespace std;
 // https://leetcode.com/problems/course-schedule/description/
 // https://leetcode.com/problems/course-schedule-ii/description/
 
-// DSF can also be used
+// DFS can also be used
 
 bool canFinish(int numCourses, vector<vector<int>> &prerequisites)
 {
